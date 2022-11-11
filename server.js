@@ -1,4 +1,5 @@
 const express = require("express")
+const cache = require("node-cache")
 const getBridges = require("./getBridges.js")
 let { nftContractAddressesURL } = require("./config.json")
 
