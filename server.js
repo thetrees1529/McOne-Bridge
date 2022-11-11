@@ -2,7 +2,7 @@ const express = require("express")
 const getBridges = require("./getBridges.js")
 let { nftContractAddressesURL } = require("./config.json")
 
-const { PORT, ACCESS_KEY } = require("dotenv").config().parsed
+const { PORT } = require("dotenv").config().parsed
 
 let bridges
 let nftContractAddresses
@@ -11,7 +11,7 @@ function main() {
 
     async function queue(sourceChain, id) {
         try {
-            nftContractAddresses = (await (await fetch(nftContractAddressesURL, {headers: {"X-Access-Key": ACCESS_KEY}})).json()).record
+            nftContractAddresses = (await (await fetch(nftContractAddressesURL)).json()).record
             const bridge = bridges.find(bridge => sourceChain == bridge.name)
             const bridging = await bridge.contract.getBridging(id)
             const destBridge = bridges.find(el => el.name == bridging.dest.chain)
