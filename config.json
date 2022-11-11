@@ -1,7 +1,7 @@
 {
     "nftContractAddressesURL": "https://gist.githubusercontent.com/thetrees1529/dc1d4a5e3995c3027b0b42b38e3fd183/raw/acd364ebb9c8f56cea0d7a050d230d737ac43ae3/nftContractAddresses.json",
     "chains": [{
-        "rpc": "https://rpc.onechain.services",
+        "rpc": "https://rpc.ankr.com/harmony",
         "contractAddress": "0x6D30e42730774CFE9Df8f1ffF609a7757883dD68"
     },
     {
