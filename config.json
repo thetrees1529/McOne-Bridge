@@ -1,22 +1,11 @@
 {
+    "nftContractAddressesURL": "https://api.jsonbin.io/v3/b/636e72570e6a79321e46c108",
     "chains": [{
         "rpc": "https://api.harmony.one",
-        "contractAddress": "0xd0524bb9D16f92EDBb83b0103BD0969D6d0d3300"
+        "contractAddress": "0x6D30e42730774CFE9Df8f1ffF609a7757883dD68"
     },
     {
         "rpc": "https://rpc.ankr.com/avalanche_fuji",
-        "contractAddress": "0xaf777b4dD20D87EDe48Ac4fA8E8399cAC52f5d22"
-    }],
-    "nftContractAddresses": [
-        [
-            {
-                "chain": "fuji",
-                "contractAddress": "0xab96DBdE49fC578b85e06D9cEc1B5Ef34a1866c8"
-            },
-            {
-                "chain": "harmony",
-                "contractAddress": "0x63E6Bc0e6f54D908c9667385c41D850c8B82319e"
-            }
-        ]
-    ]
+        "contractAddress": "0xE2e63020e9E185923DcBF1f647AE0151BE9e4f53"
+    }]
 }

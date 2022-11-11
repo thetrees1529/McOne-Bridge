@@ -1,7 +1,7 @@
 const ethers = require("ethers")
 const abi = require("./abis/Bridge.json").abi
 const privateKey = require("./privateKey.json")
-const { chains } = require("./config.json")
+let { chains } = require("./config.json")
 
 async function get() {
     return await Promise.all(
@@ -41,6 +41,7 @@ async function get() {
 }
 
 module.exports = async () => {
+
     const bridges = await get()
     
     return bridges
