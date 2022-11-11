@@ -53,7 +53,7 @@ function main() {
     const app = express()
     app.use(express.json())
     app.get("/bridges", (req,res) => {
-        res.json(bridges.map(bridge => {const temp = bridge; temp.contractAddress = temp.contract.address;delete temp.contract;delete temp.processing; return temp}))
+        res.json(bridges.map(bridge => ({name: bridge.name, queue: bridge.queued})))
     })
     app.post("/queueRequest", async (req, res) => {
         const { sourceChain, id } = req.body
