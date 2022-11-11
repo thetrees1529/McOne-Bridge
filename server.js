@@ -13,7 +13,6 @@ function main() {
         try {
             nftContractAddresses = JSON.parse(await (await fetch(nftContractAddressesURL)).text())
             const bridge = bridges.find(bridge => sourceChain == bridge.name)
-            console.log(nftContractAddresses)
             const bridging = await bridge.contract.getBridging(id)
             const destBridge = bridges.find(el => el.name == bridging.dest.chain)
 
