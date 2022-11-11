@@ -11,8 +11,9 @@ function main() {
 
     async function queue(sourceChain, id) {
         try {
-            nftContractAddresses = (await (await fetch(nftContractAddressesURL)).json()).record
+            nftContractAddresses = JSON.parse(await (await fetch(nftContractAddressesURL)).text())
             const bridge = bridges.find(bridge => sourceChain == bridge.name)
+            console.log(nftContractAddresses)
             const bridging = await bridge.contract.getBridging(id)
             const destBridge = bridges.find(el => el.name == bridging.dest.chain)
 
