@@ -26,7 +26,7 @@ async function get() {
                         const item = this.queued.pop()
                         try {
                             const tx = await this.contract.release(item.id, item.nft, item.receiver)
-                            await tx.wait()
+                            await Promise.race([tx.wait(), new Promise((res,rej)=>setTimeout(()=>rej("Timed out"),20000))])
                         } catch(e) {
                             console.log(`bridge failed on destination chain ${this.name} for ${item} with reason: ${e}`)
                         }
