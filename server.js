@@ -1,7 +1,9 @@
 const express = require("express")
 const cache = require("node-cache")
+const abi = require("./abis/ERC721.json").abi
 const getBridges = require("./getBridges.js")
 let { nftContractAddressesURL } = require("./config.json")
+const { ethers } = require("ethers")
 
 const { PORT } = require("dotenv").config().parsed
 
@@ -10,10 +12,16 @@ let nftContractAddresses
 
 function main() {
 
+    function findBridge(name) {
+        const bridge = bridges.find(bri => name == bri.name)
+        if(!bridge) throw new Error("bridge not found")
+        return bridge
+    }
+
     async function queue(sourceChain, id) {
         try {
-            nftContractAddresses = JSON.parse(await (await fetch(nftContractAddressesURL)).text())
-            const bridge = bridges.find(bridge => sourceChain == bridge.name)
+            nftContractAddresses = await getNftContractAddresses()
+            const bridge = findBridge(sourceChain)
             const bridging = await bridge.contract.getBridging(id)
             const destBridge = bridges.find(el => el.name == bridging.dest.chain)
 
@@ -55,6 +63,28 @@ function main() {
     app.get("/bridges", (req,res) => {
         res.json(bridges.map(bridge => ({name: bridge.name, queue: bridge.queued, contractAddress: bridge.contract.address})))
     })
+    app.get("/options", async (req,res) => {
+        try {
+
+            const nftContractAddresses = await getNftContractAddresses()
+
+            return Promise.all(nftContractAddresses.map(async arr => {
+                return Promise.all(arr.map(async el => {
+                    const contract = new ethers.Contract(el.contractAddress, abi, findBridge(el.chain).provider)
+                    return {
+                        chain: el.name, 
+                        nft: {
+                            contractAddress: el.contractAddress,
+                            name: await contract.name(),
+                            symbol: await contract.symbol()
+                        }
+                    }
+                }))
+            }))
+        } catch(e) {
+            console.log(`failed to get options with reason: ${e}`)
+        }
+    })
     app.post("/queueRequest", async (req, res) => {
         const { sourceChain, id } = req.body
         const success = await queue(sourceChain, id)
@@ -63,6 +93,10 @@ function main() {
     })
 
     app.listen(PORT, ()=>console.log(`listening on port ${PORT}`))
+}
+
+async function getNftContractAddresses() {
+    return JSON.parse(await (await fetch(nftContractAddressesURL)).text())
 }
 
 (async () => {
