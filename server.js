@@ -23,7 +23,7 @@ function main() {
             nftContractAddresses = await getNftContractAddresses()
             const bridge = findBridge(sourceChain)
             const bridging = await bridge.contract.getBridging(id)
-            const destBridge = bridges.find(el => el.name == bridging.dest.chain)
+            const destBridge = findBridge(bridging.dest.chain)
 
             const completed = await destBridge.contract.externalCompletions(id)
             if(completed) return false
