@@ -68,7 +68,7 @@ function main() {
 
             const nftContractAddresses = await getNftContractAddresses()
 
-            return Promise.all(nftContractAddresses.map(async arr => {
+            res.send (await Promise.all(nftContractAddresses.map(async arr => {
                 return await Promise.all(arr.map(async el => {
                     const contract = new ethers.Contract(el.contractAddress, abi, findBridge(el.chain).provider)
                     return {
@@ -80,10 +80,12 @@ function main() {
                         }
                     }
                 }))
-            }))
+            })))
         } catch(e) {
             console.log(`failed to get options with reason: ${e}`)
+            res.sendStatus(500)
         }
+
     })
     app.post("/queueRequest", async (req, res) => {
         const { sourceChain, id } = req.body
