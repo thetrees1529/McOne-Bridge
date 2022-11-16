@@ -71,6 +71,7 @@ function main() {
             res.send (await Promise.all(nftContractAddresses.map(async arr => {
                 return await Promise.all(arr.map(async el => {
                     const contract = new ethers.Contract(el.contractAddress, abi, findBridge(el.chain).provider)
+                    console.log(contract)
                     return {
                         chain: el.name, 
                         nft: {
