@@ -8,7 +8,6 @@ const { ethers } = require("ethers")
 const { PORT } = require("dotenv").config().parsed
 
 let bridges
-let nftContractAddresses
 
 function main() {
 
@@ -38,7 +37,7 @@ function main() {
 
     async function queue(sourceChain, id) {
         try {
-            nftContractAddresses = await getNftContractAddresses()
+            
             const bridge = findBridge(sourceChain)
             const bridging = await bridge.contract.getBridging(id)
             const destBridge = findBridge(bridging.dest.chain)
