@@ -1,11 +1,21 @@
 {
     "nftContractAddressesURL": "https://gist.githubusercontent.com/thetrees1529/dc1d4a5e3995c3027b0b42b38e3fd183/raw/acd364ebb9c8f56cea0d7a050d230d737ac43ae3/nftContractAddresses.json",
-    "chains": [{
-        "rpc": "https://rpc.ankr.com/harmony",
-        "contractAddress": "0x6D30e42730774CFE9Df8f1ffF609a7757883dD68"
-    },
-    {
-        "rpc": "https://rpc.ankr.com/avalanche_fuji",
-        "contractAddress": "0xE2e63020e9E185923DcBF1f647AE0151BE9e4f53"
-    }]
+    "chains": [
+        {
+            "rpc": "https://rpc.ankr.com/harmony",
+            "contractAddress": "0x6D30e42730774CFE9Df8f1ffF609a7757883dD68"
+        },
+        {
+            "rpc": "https://rpc.ankr.com/avalanche_fuji",
+            "contractAddress": "0xE2e63020e9E185923DcBF1f647AE0151BE9e4f53"
+        },
+        {
+            "rpc": "https://api.s0.b.hmny.io/",
+            "contractAddress": "0x376038c6b72769937a3bba9927279ec18bdd9d54"
+        },
+        {
+            "rpc": "https://api.s0.ps.hmny.io/",
+            "contractAddress": "0x376038C6B72769937A3Bba9927279ec18bdD9d54"
+        }
+    ]
 }
