@@ -18,26 +18,21 @@ function main() {
     }
 
     async function findNftContractAddress(addr, chain) {
-
         const nftContractAddresses = await getNftContractAddresses()
-
         const pool = nftContractAddresses.find(
                 pool => pool.find(
                     el => el.contractAddress == addr
                 )
             )
         if(!pool) throw new Error("nft not found")
-
         const nft = pool.find(el => el.chain == chain)
-        
         if(!nft) throw new Error("nft contract on destination chain not found")
         return nft.contractAddress
-        
     }
 
     async function queue(sourceChain, id) {
         try {
-            
+
             const bridge = findBridge(sourceChain)
             const bridging = await bridge.contract.getBridging(id)
             const destBridge = findBridge(bridging.dest.chain)
