@@ -3,19 +3,11 @@
     "chains": [
         {
             "rpc": "https://rpc.ankr.com/harmony",
-            "contractAddress": "0xf1Cb144F4851Ac5bf868329d39CabB6db492Bf91"
+            "contractAddress": "0x5f5Eb8B4103c4B52FA3329555e4583d17B5B0d6b"
         },
         {
-            "rpc": "https://rpc.ankr.com/avalanche_fuji",
-            "contractAddress": "0x5f7f55A1746AEdA869B48808FC5058Cd3b8AF94E"
-        },
-        {
-            "rpc": "https://api.s0.b.hmny.io/",
-            "contractAddress": "0x6De93557AF1Ec0Eac3CC40E3Ff255C5089101E24"
-        },
-        {
-            "rpc": "https://api.s0.ps.hmny.io/",
-            "contractAddress": "0xC655585e9Fe09028E622F91CC135CB9d8449F181"
+            "rpc": "https://api.avax.network/ext/bc/C/rpc",
+            "contractAddress": "0xB85f2052B5C23C43a17166759AC1606F92cF0f68"
         }
     ]
 }
