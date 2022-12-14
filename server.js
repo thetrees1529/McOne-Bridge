@@ -2,10 +2,21 @@ const express = require("express")
 const cache = require("node-cache")
 const abi = require("./abis/ERC721.json").abi
 const getBridges = require("./getBridges.js")
+//const cors = require('cors');
+const fs = require("fs")
+const https = require('https')
 let { nftContractAddressesURL } = require("./config.json")
 const { ethers } = require("ethers")
 
-const { PORT } = require("dotenv").config().parsed
+//const { PORT } = require("dotenv").config().parsed
+const options = {
+   key: fs.readFileSync('/etc/letsencrypt/live/bridgeserver.mcverse.app/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/bridgeserver.mcverse.app/fullchain.pem')};
+
+//httpsServer.listen(443, () => {
+//    console.log('HTTPS Server running on port 443');
+//});
+
 
 let bridges
 
@@ -66,6 +77,11 @@ function main() {
     })
     
     const app = express()
+    app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "*");
+        next();
+    })
     app.use(express.json())
     app.get("/bridges", (req,res) => {
         res.json(bridges.map(bridge => ({name: bridge.name, queue: bridge.queued, contractAddress: bridge.contract.address})))
@@ -101,8 +117,8 @@ function main() {
         if(!success) return res.sendStatus(500)
         res.sendStatus(200)
     })
-
-    app.listen(PORT, ()=>console.log(`listening on port ${PORT}`))
+    https.createServer(options, app).listen(443)
+//    app.listen(PORT, ()=>console.log(`listening on port ${PORT}`))
 }
 
 async function getNftContractAddresses() {
